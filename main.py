@@ -12,7 +12,7 @@ def rndm(first,i):
   ai = random.randint(c2, c1)
   return ai
 
-def consume(first, day):
+def consume(first, day, mode):
     ai = 0
     d = day
     f = 0
@@ -30,7 +30,11 @@ def consume(first, day):
       second[2][i-1] = f + first[2] + first[0]
       i = i + 1
      else:
-      ai = rndm(first,d)
+      if (mode == 1):
+        ai = 199
+      else:
+        ai = rndm(first,d)
+        if ai > 199: ai = 199
       second[0][d-1] = d
       second[1][d-1] = ai
       first[2] = first[2] - ai
@@ -49,13 +53,24 @@ firstA[0] = int (input("2000/10:before "))
 firstA[1] = int (input("2000/10:after "))
 firstA[2] = firstA[1] - firstA[0]
 
-firstB[0] = int (input("2000/10:before "))
-firstB[1] = int (input("2000/10:after "))
+firstB[0] = int (input("2000/11:before "))
+firstB[1] = int (input("2000/11:after "))
 firstB[2] = firstB[1] - firstB[0]
 
 day = int(input("day: "))
 
 print ("raznica 2000/10", firstA[2])
 print ("raznica 2000/11", firstB[2])
-consume(firstA, day)
-consume(firstB, day)
+if (firstA[2] > day*199):
+    firstB[2] = firstB[2] + firstA[2] - (day*199)
+    firstA[2] = day*199
+    consume(firstA, day, 1)
+    consume(firstB, day, 0)
+elif (firstB[2] > day*199):
+    firstA[2] = firstA[2] + firstB[2] - (day*199)
+    firstB[2] = day*199
+    consume(firstB, day, 1)
+    consume(firstA, day, 0)
+else:
+    consume(firstA, day,0)
+    consume(firstB, day,0)
