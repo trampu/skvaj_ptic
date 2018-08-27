@@ -1,13 +1,11 @@
 #-*-coding:utf8;-*-
 #qpy:3
 #qpy:console
-
 print("This is console module")
-#-*-coding:utf8;-*-
 print("calculated day consume")
 import random
-def rndm(a,i):
-  c = a/i
+def rndm(firstA,i):
+  c = firstA[2]/i
   c1 = c+c*0.05
   c2 = c-c*0.05
   c1 = int(c1)
@@ -16,18 +14,12 @@ def rndm(a,i):
   return ai
 i = 1
 ai = 0
-a = input("2000/10:before ")
-a = int(a)
-aa = input("2000/10:after ")
-aa = int(aa)
-a = aa - a
-#b = input("2000/11:before ")
-#b = int(b)
-#bb = input("2000/10:after ")
-#bb = int(bb)
-#b = bb - b
-#a = 3890
-#rashod
+firstA = [1,1,1]
+firstA[0] = input("2000/10:before ")
+#firstA[0] = int firstA[0]
+firstA[1] = input("2000/10:after ")
+#firstA[1] = int firstA[1]
+firstA[2] = firstA[1] - firstA[0]
 b = 13
 day = input("day: ")
 wday = day = int(day)
@@ -43,23 +35,23 @@ second = [secondD, secondA, secondB]
 #srok
 d = day
 f = 0
-print ("nachalo", a, day)
+print ("nachalo", firstA[2], day)
 while i <= day:
  if i == day:
   second[0][i-1] = i
-  second[1][i-1] = a
+  second[1][i-1] = firstA[2]
   second[2][i-1] = f
   i = i +1
- else: 
+ else:
   ai = rndm(a,d)
   second[0][d-1] = d
   second[1][d-1] = ai
-  second[2][d-1] = a
-  a = a - ai
+  second[2][d-1] = firstA[2]
+  firstA[2] = firstA[2] - ai
   d = d - 1
   i = i + 1
   f = f + ai
   print("0")
 
-print ("finish", f,a)
+print ("finish", f,firstA[2])
 print ("all", second)
