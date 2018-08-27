@@ -12,7 +12,7 @@ def rndm(first,i):
   ai = random.randint(c2, c1)
   return ai
 
-def consume(first, day, mode, delta):
+def consume(first, day, delta):
     ai = 0
     d = day
     f = 0
@@ -30,10 +30,7 @@ def consume(first, day, mode, delta):
       second[2][i-1] = f + first[2] + first[0] + delta
       i = i + 1
      else:
-      if (mode == 1):
-        ai = limit
-      else:
-        ai = rndm(first,d)
+      ai = rndm(first,d)
       second[0][d-1] = d
       second[1][d-1] = ai
       first[2] = first[2] - ai
@@ -58,24 +55,21 @@ firstB[2] = firstB[1] - firstB[0]
 
 day = int(input("day: "))
 limit = int(input("limit: "))
+limit = limit - (limit * 0.06)
 #limit dly skvajiny
 deltaA = int(input("delta1: "))
 deltaB = int(input("delta2: "))
 #delta - raznica s faktom
 print ("raznica 1", firstA[2])
-print ("potreblenie 1", firstA[2]/day)
+print ("potreblenie 1", int (firstA[2]/day))
 print ("raznica 2", firstB[2])
-print ("potreblenie 2", firstB[2]/day)
+print ("potreblenie 2", int (firstB[2]/day))
 if (firstB[2] > day*limit) or (firstA[2] > day*limit) and (deltaB < deltaA):
-    firstA[2] = firstA[2] + firstB[2] - (day*limit)
-    firstB[2] = day*limit
-    consume(firstA, day, 0, deltaA)
-    consume(firstB, day, 1, deltaB)
+    firstA[2] = int(firstA[2] + firstB[2] - (day*limit))
+    firstB[2] = int(day*limit)
 elif (firstB[2] > day*limit) or (firstA[2] > day*limit) and (deltaA < deltaB):
-    firstB[2] = firstB[2] + firstA[2] - (day*limit)
-    firstA[2] = day*limit
-    consume(firstA, day, 1, deltaA)
-    consume(firstB, day, 0, deltaB)
-else:
-    consume(firstA, day,0, deltaA)
-    consume(firstB, day,0, deltaB)
+    firstB[2] = int(firstB[2] + firstA[2] - (day*limit))
+    firstA[2] = int(day*limit)
+
+consume(firstA, day, deltaA)
+consume(firstB, day, deltaB)
