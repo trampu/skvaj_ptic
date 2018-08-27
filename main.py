@@ -40,19 +40,19 @@ print ("nachalo", firstA[2], day)
 while i <= day:
  if i == day:
   second[0][i-1] = i
-  second[1][i-1] = firstA[2]
-  second[2][i-1] = f
+  second[1][0] = firstA[2]
+  second[2][i-1] = f + firstA[2] + firstA[0]
   i = i +1
  else:
   ai = rndm(firstA,d)
   second[0][d-1] = d
   second[1][d-1] = ai
-  second[2][d-1] = firstA[2]
   firstA[2] = firstA[2] - ai
+  second[2][d-2] = firstA[2] + firstA[0]
   d = d - 1
   i = i + 1
   f = f + ai
-  print("0")
+  print(d, ai, firstA[2])
 
 print ("finish", f,firstA[2])
 print ("all", second)
