@@ -16,10 +16,11 @@ i = 1
 ai = 0
 firstA = [1,1,1]
 firstA[0] = input("2000/10:before ")
-#firstA[0] = int firstA[0]
+firstA[0] = int(firstA[0])
 firstA[1] = input("2000/10:after ")
-#firstA[1] = int firstA[1]
+firstA[1] = int(firstA[1])
 firstA[2] = firstA[1] - firstA[0]
+
 b = 13
 day = input("day: ")
 wday = day = int(day)
@@ -43,7 +44,7 @@ while i <= day:
   second[2][i-1] = f
   i = i +1
  else:
-  ai = rndm(a,d)
+  ai = rndm(firstA,d)
   second[0][d-1] = d
   second[1][d-1] = ai
   second[2][d-1] = firstA[2]
