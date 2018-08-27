@@ -64,16 +64,26 @@ print ("raznica 2000/10", firstA[2])
 print ("potreblenie 2000/10", firstA[2]/day)
 print ("raznica 2000/11", firstB[2])
 print ("potreblenie 2000/11", firstB[2]/day)
-if (firstA[2] > day*199):
+if (firstA[2] > day*199) and (deltaA > deltaB):
     firstB[2] = firstB[2] + firstA[2] - (day*199)
     firstA[2] = day*199
     consume(firstA, day, 1, deltaA)
     consume(firstB, day, 0, deltaB)
-elif (firstB[2] > day*199):
+elif (firstB[2] > day*199) and (deltaB > deltaA):
     firstA[2] = firstA[2] + firstB[2] - (day*199)
     firstB[2] = day*199
     consume(firstA, day, 0, deltaA)
     consume(firstB, day, 1, deltaB)
+elif (firstB[2] > day*199) or (firstA[2] > day*199) and (deltaB > deltaA):
+    firstA[2] = firstA[2] + firstB[2] - (day*199)
+    firstB[2] = day*199
+    consume(firstA, day, 0, deltaA)
+    consume(firstB, day, 1, deltaB)
+elif (firstB[2] > day*199) or (firstA[2] > day*199) and (deltaA > deltaB):
+    firstB[2] = firstB[2] + firstA[2] - (day*199)
+    firstA[2] = day*199
+    consume(firstA, day, 1, deltaA)
+    consume(firstB, day, 0, deltaB)
 else:
     consume(firstA, day,0, deltaA)
     consume(firstB, day,0, deltaB)
