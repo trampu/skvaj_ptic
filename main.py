@@ -22,7 +22,7 @@ def consume(first, day, delta):
     secondB = secondB*(day)
     secondD = secondD*(day)
     second = [secondD, secondA, secondB]
-    print ("_________________---------------_________________")
+    print ("---------------_________________---------------_________________")
     while i <= day:
      if i == day:
       second[0][i-1] = i
@@ -55,7 +55,7 @@ firstB[2] = firstB[1] - firstB[0]
 
 day = int(input("day: "))
 limit = int(input("limit: "))
-limit = limit - (limit * 0.06)
+limit = limit - (limit * 0.08)
 #limit dly skvajiny
 deltaA = int(input("delta1: "))
 deltaB = int(input("delta2: "))
