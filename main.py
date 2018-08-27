@@ -31,10 +31,9 @@ def consume(first, day, mode, delta):
       i = i + 1
      else:
       if (mode == 1):
-        ai = 199
+        ai = limit
       else:
         ai = rndm(first,d)
-        if ai > 199: ai = 199
       second[0][d-1] = d
       second[1][d-1] = ai
       first[2] = first[2] - ai
@@ -49,39 +48,32 @@ def consume(first, day, mode, delta):
 firstA =  [1,1,1]
 firstB =  [1,1,1]
 first = [1,1,1]
-firstA[0] = int (input("2000/10:before "))
-firstA[1] = int (input("2000/10:after "))
+firstA[0] = int (input("1:before "))
+firstA[1] = int (input("1:after "))
 firstA[2] = firstA[1] - firstA[0]
 
-firstB[0] = int (input("2000/11:before "))
-firstB[1] = int (input("2000/11:after "))
+firstB[0] = int (input("2:before "))
+firstB[1] = int (input("2:after "))
 firstB[2] = firstB[1] - firstB[0]
 
 day = int(input("day: "))
-deltaA = int(input("deltaA: "))
-deltaB = int(input("deltaB: "))
-print ("raznica 2000/10", firstA[2])
-print ("potreblenie 2000/10", firstA[2]/day)
-print ("raznica 2000/11", firstB[2])
-print ("potreblenie 2000/11", firstB[2]/day)
-if (firstA[2] > day*199) and (deltaA > deltaB):
-    firstB[2] = firstB[2] + firstA[2] - (day*199)
-    firstA[2] = day*199
-    consume(firstA, day, 1, deltaA)
-    consume(firstB, day, 0, deltaB)
-elif (firstB[2] > day*199) and (deltaB > deltaA):
-    firstA[2] = firstA[2] + firstB[2] - (day*199)
-    firstB[2] = day*199
+limit = int(input("limit: "))
+#limit dly skvajiny
+deltaA = int(input("delta1: "))
+deltaB = int(input("delta2: "))
+#delta - raznica s faktom
+print ("raznica 1", firstA[2])
+print ("potreblenie 1", firstA[2]/day)
+print ("raznica 2", firstB[2])
+print ("potreblenie 2", firstB[2]/day)
+if (firstB[2] > day*limit) or (firstA[2] > day*limit) and (deltaB < deltaA):
+    firstA[2] = firstA[2] + firstB[2] - (day*limit)
+    firstB[2] = day*limit
     consume(firstA, day, 0, deltaA)
     consume(firstB, day, 1, deltaB)
-elif (firstB[2] > day*199) or (firstA[2] > day*199) and (deltaB > deltaA):
-    firstA[2] = firstA[2] + firstB[2] - (day*199)
-    firstB[2] = day*199
-    consume(firstA, day, 0, deltaA)
-    consume(firstB, day, 1, deltaB)
-elif (firstB[2] > day*199) or (firstA[2] > day*199) and (deltaA > deltaB):
-    firstB[2] = firstB[2] + firstA[2] - (day*199)
-    firstA[2] = day*199
+elif (firstB[2] > day*limit) or (firstA[2] > day*limit) and (deltaA < deltaB):
+    firstB[2] = firstB[2] + firstA[2] - (day*limit)
+    firstA[2] = day*limit
     consume(firstA, day, 1, deltaA)
     consume(firstB, day, 0, deltaB)
 else:
