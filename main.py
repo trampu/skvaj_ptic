@@ -9,6 +9,8 @@ now = now.strftime("%d.%m.%Y")
 first = [1,1,1,1]
 firstA =  [1,1,1,1]
 firstB =  [1,1,1,1]
+firstC =  [1,1,1,1]
+firstD =  [1,1,1,1]
 final = []
 def rndm(first,i):
   c = first[2]/i
@@ -81,22 +83,56 @@ def iinput():
     firstB[2] = firstB[1] - firstB[0]
     firstA[3] = int (zero[13])
     firstB[3] = int (zero[14])
+    firstC[0] = int (zero[11])
+    firstC[1] = int (input("3: "))
+    firstC[2] = firstC[1] - firstC[0]
+    firstD[0] = int (zero[12])
+    firstD[1] = int (input("4: "))
+    firstD[2] = firstD[1] - firstD[0]
+    firstC[3] = int (zero[15])
+    firstD[3] = int (zero[16])
 iinput()
 day = int(input("day: "))
-limit = int(input("limit: "))
+#limit = int(input("limit: "))
+limit = 200
 limit = limit - (limit * 0.08)
+limit2 = 60
+limit2 = limit2 - (limit2 * 0.08)
 #delta - raznica s faktom
 print ("raznica 1", firstA[2])
 print ("potreblenie 1", int (firstA[2]/day))
 print ("raznica 2", firstB[2])
 print ("potreblenie 2", int (firstB[2]/day))
+print ("raznica 3", firstC[2])
+print ("potreblenie 3", int (firstC[2]/day))
+print ("raznica 4", firstD[2])
+print ("potreblenie 4", int (firstD[2]/day))
 if (firstB[2] > day*limit) or (firstA[2] > day*limit) and (firstB[3] < firstA[3]):
     firstA[2] = int(firstA[2] + firstB[2] - (day*limit))
     firstB[2] = int(day*limit)
 elif (firstB[2] > day*limit) or (firstA[2] > day*limit) and (firstA[3] < firstB[3]):
     firstB[2] = int(firstB[2] + firstA[2] - (day*limit))
     firstA[2] = int(day*limit)
-
+if (firstC[2] > day*limit2) or (firstC[2] > day*limit2) and (firstD[3] < firstC[3]):
+    firstC[2] = int(firstC[2] + firstD[2] - (day*limit2))
+    firstD[2] = int(day*limit2)
+elif (firstD[2] > day*limit2) or (firstC[2] > day*limit2) and (firstC[3] < firstD[3]):
+    firstD[2] = int(firstD[2] + firstC[2] - (day*limit2))
+    firstC[2] = int(day*limit2)
 consume(firstA, day, 0)
 consume(firstB, day, 2)
+consume(firstC, day, 4)
+consume(firstD, day, 6)
 print(final)
+def ioutput():
+    file = open("in.csv", 'r+')
+    linelist = file.readlines()
+    for i in final:
+        print (i)
+        b = ';'.join(map(str, i))
+        linelist.append(b)
+    print (linelist)
+    for item in linelist:
+         file.write(item + '\n')
+    file.close()
+ioutput()
