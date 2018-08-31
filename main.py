@@ -125,14 +125,15 @@ consume(firstC, day, 4)
 consume(firstD, day, 6)
 #print(final)
 def ioutput():
-    file = open("in.csv", 'r+')
-    linelist = file.readlines()
+    file = open("in.csv", 'a+')
+    #linelist = file.readlines()
+    linelist = []
+    file.write('\n')
     for i in final:
         print (i)
         b = ';'.join(map(str, i))
         linelist.append(b)
     print (linelist)
-    file.write("\n")
     for item in linelist:
          file.write(item) #file.write(item + '\n')
     file.close()
