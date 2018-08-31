@@ -30,41 +30,42 @@ def consume(first, day, output):
     secondA = secondA*(day)
     secondB = secondB*(day)
     secondD = secondD*(day)
-    second = [secondD, secondA, secondB]
     print ("---------------_________________---------------_________________")
     while i <= day:
      if i == day:
-      second[0][i-1] = i
-      second[1][0] = first[2]
-      second[2][i-1] = f + first[2] + first[0] - first[3]
+      secondD[i-1] = i
+      secondA[0] = first[2]
+      secondB[i-1] = f + first[2] + first[0] - first[3]
       i = i + 1
      else:
       ai = rndm(first,d)
-      second[0][d-1] = d
-      second[1][d-1] = ai
+      secondD[d-1] = d
+      secondA[d-1] = ai
       first[2] = first[2] - ai
-      second[2][d-2] = first[2] + first[0] - first[3]
+      secondB[d-2] = first[2] + first[0] - first[3]
       d = d - 1
       i = i + 1
       f = f + ai
-    print ("days", second[0])
-    print ("potr", second[1])
-    print ("itog", second[2])
+    print ("days", secondD)
+    print ("potr", secondA)
+    print ("itog", secondB)
     if output == 0:
-        for item in second[0]:
+        for item in secondD:
             final.append(item)
             final[item-1] = [1,2,3,4,5,6,7,8,9,None,None,None,None,None,None,None,None]
-            final[item-1][1] = second[2][item-1]
-            final[item-1][2] = second[1][item-1]
-        final[len(second[2])-1][9] = first[1]
-        final[len(second[2])-1][13] = first[1] - final[len(second[2])-1][9]
+            final[item-1][1] = secondB[item-1]
+            final[item-1][2] = secondA[item-1]
+        final[len(secondB)-1][9] = first[1]
+        final[len(secondB)-1][13] = final[len(secondB)-1][1] - final[len(secondB)-1][9]
     else:
-        for item in second[0]:
-            final[item-1][1+output] = second[2][item-1]
-            final[item-1][2+output] = second[1][item-1]
-        final[len(second[2])-1][0] = now
-        final[len(second[2])-1][int(9+output/2)] = first[1]
-        final[len(second[2])-1][int(13+output/2)] = first[1] - final[len(second[2])-1][9]
+        for item in secondD:
+            final[item-1][1+output] = secondB[item-1]
+            final[item-1][2+output] = secondA[item-1]
+            final[item-1][16] = str(final[len(secondB)-1][16]) + "\n"
+        final[len(secondB)-1][0] = now
+        final[len(secondB)-1][int(9+output/2)] = first[1]
+        final[len(secondB)-1][int(13+output/2)] = final[len(secondB)-1][1+output] - final[len(secondB)-1][int(9+output/2)]
+        final[len(secondB)-1][16] = str(final[len(secondB)-1][16]).replace("\n", "")
     return(final)
 def iinput():
     file = open("in.csv")
@@ -97,8 +98,7 @@ day = int(input("day: "))
 limit = 200
 limit = limit - (limit * 0.08)
 limit2 = 60
-limit2 = limit2 - (limit2 * 0.08)
-#delta - raznica s faktom
+limit2 = limit2 - (limit2 * 0.1)
 print ("raznica 1", firstA[2])
 print ("potreblenie 1", int (firstA[2]/day))
 print ("raznica 2", firstB[2])
@@ -113,7 +113,7 @@ if (firstB[2] > day*limit) or (firstA[2] > day*limit) and (firstB[3] < firstA[3]
 elif (firstB[2] > day*limit) or (firstA[2] > day*limit) and (firstA[3] < firstB[3]):
     firstB[2] = int(firstB[2] + firstA[2] - (day*limit))
     firstA[2] = int(day*limit)
-if (firstC[2] > day*limit2) or (firstC[2] > day*limit2) and (firstD[3] < firstC[3]):
+if (firstD[2] > day*limit2) or (firstC[2] > day*limit2) and (firstD[3] < firstC[3]):
     firstC[2] = int(firstC[2] + firstD[2] - (day*limit2))
     firstD[2] = int(day*limit2)
 elif (firstD[2] > day*limit2) or (firstC[2] > day*limit2) and (firstC[3] < firstD[3]):
@@ -123,7 +123,7 @@ consume(firstA, day, 0)
 consume(firstB, day, 2)
 consume(firstC, day, 4)
 consume(firstD, day, 6)
-print(final)
+#print(final)
 def ioutput():
     file = open("in.csv", 'r+')
     linelist = file.readlines()
@@ -132,7 +132,8 @@ def ioutput():
         b = ';'.join(map(str, i))
         linelist.append(b)
     print (linelist)
+    file.write("\n")
     for item in linelist:
-         file.write(item + '\n')
+         file.write(item) #file.write(item + '\n')
     file.close()
 ioutput()
