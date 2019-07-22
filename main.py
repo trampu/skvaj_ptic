@@ -35,14 +35,14 @@ def consume(first, day, output):
      if i == day:
       secondD[i-1] = i
       secondA[0] = first[2]
-      secondB[i-1] = f + first[2] + first[0] + first[3]
+      secondB[i-1] = f + first[2] + first[0] - first[3]
       i = i + 1
      else:
       ai = rndm(first,d)
       secondD[d-1] = d
       secondA[d-1] = ai
       first[2] = first[2] - ai
-      secondB[d-2] = first[2] + first[0] + first[3]
+      secondB[d-2] = first[2] + first[0] - first[3]
       d = d - 1
       i = i + 1
       f = f + ai
